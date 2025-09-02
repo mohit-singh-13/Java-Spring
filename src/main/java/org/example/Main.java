@@ -8,10 +8,16 @@ import org.hibernate.cfg.Configuration;
 
 public class Main {
     public static void main(String[] args) {
+        Laptop laptop = new Laptop();
+        laptop.setBrand("Lenovo");
+        laptop.setModel("Ideapad Gaming 3");
+        laptop.setRam(16);
+
         Student s1 = new Student();
-        s1.setsName("Rahul");
-        s1.setRollNo(46);
+        s1.setsName("Jyoti");
+        s1.setRollNo(27);
         s1.setsAge(21);
+        s1.setLaptop(laptop);
 
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Student.class);
@@ -21,7 +27,7 @@ public class Main {
             Session session = sessionFactory.openSession();
 
             Transaction transaction = session.beginTransaction();
-            session.remove(s1);
+            session.persist(s1);
             transaction.commit();
 
             session.close();
