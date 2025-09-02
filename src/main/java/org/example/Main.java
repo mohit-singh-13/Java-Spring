@@ -9,11 +9,9 @@ import org.hibernate.cfg.Configuration;
 public class Main {
     public static void main(String[] args) {
         Student s1 = new Student();
-        s1.setsName("Ajay");
-        s1.setRollNo(45);
+        s1.setsName("Rahul");
+        s1.setRollNo(46);
         s1.setsAge(21);
-
-        Student s2;
 
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Student.class);
@@ -22,11 +20,11 @@ public class Main {
         try (SessionFactory sessionFactory = configuration.buildSessionFactory()) {
             Session session = sessionFactory.openSession();
 
-            s2 = session.find(Student.class, 27);
+            Transaction transaction = session.beginTransaction();
+            session.merge(s1);
+            transaction.commit();
 
             session.close();
-
-            System.out.println(s2);
         } catch (HibernateException err) {
             System.out.println("Error while creating hibernate session : " + err.getMessage());
         }
