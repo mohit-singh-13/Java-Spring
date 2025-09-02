@@ -2,7 +2,7 @@ package org.example;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class Student {
     private int rollNo;
     private String sName;
     private int sAge;
-    @OneToMany(mappedBy = "student")    // we are explicitly telling the Student table to not create a third table because Laptop is keeping the track with "student" field
+    @ManyToMany
     private List<Laptop> laptops;
 
     public int getRollNo() {

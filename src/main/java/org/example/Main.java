@@ -22,14 +22,23 @@ public class Main {
         l2.setModel("ROG");
         l2.setRam(16);
 
+        Laptop l3 = new Laptop();
+        l3.setLid(3);
+        l3.setBrand("DELL");
+        l3.setModel("XP");
+        l3.setRam(16);
+
         Student s1 = new Student();
         s1.setsName("Jyoti");
         s1.setRollNo(27);
         s1.setsAge(21);
         s1.setLaptops(Arrays.asList(l1, l2));
 
-        l1.setStudent(s1);
-        l2.setStudent(s1);
+        Student s2 = new Student();
+        s2.setsName("Mohit");
+        s2.setRollNo(36);
+        s2.setsAge(22);
+        s2.setLaptops(Arrays.asList(l2, l3));
 
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Student.class);
@@ -42,7 +51,9 @@ public class Main {
             Transaction transaction = session.beginTransaction();
             session.persist(l1);
             session.persist(l2);
+            session.persist(l3);
             session.persist(s1);
+            session.persist(s2);
             transaction.commit();
 
             session.close();

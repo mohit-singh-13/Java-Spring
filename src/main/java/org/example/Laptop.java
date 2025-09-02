@@ -2,7 +2,9 @@ package org.example;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
+
+import java.util.List;
 
 @Entity
 public class Laptop {
@@ -11,8 +13,8 @@ public class Laptop {
     private String brand;
     private String model;
     private int ram;
-    @ManyToOne
-    private Student student;
+    @ManyToMany(mappedBy = "laptops")   // to avoid the conflict, else both will map the data
+    private List<Student> students;
 
     public int getLid() {
         return lid;
@@ -46,12 +48,12 @@ public class Laptop {
         this.ram = ram;
     }
 
-    public Student getStudent() {
-        return student;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     @Override
