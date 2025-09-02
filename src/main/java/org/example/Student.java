@@ -2,6 +2,7 @@ package org.example;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Student {
@@ -9,6 +10,7 @@ public class Student {
     private int rollNo;
     private String sName;
     private int sAge;
+    @OneToOne
     private Laptop laptop;
 
     public int getRollNo() {

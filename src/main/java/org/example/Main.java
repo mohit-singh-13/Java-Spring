@@ -8,25 +8,28 @@ import org.hibernate.cfg.Configuration;
 
 public class Main {
     public static void main(String[] args) {
-        Laptop laptop = new Laptop();
-        laptop.setBrand("Lenovo");
-        laptop.setModel("Ideapad Gaming 3");
-        laptop.setRam(16);
+        Laptop l1 = new Laptop();
+        l1.setLid(1);
+        l1.setBrand("Lenovo");
+        l1.setModel("Ideapad Gaming 3");
+        l1.setRam(16);
 
         Student s1 = new Student();
         s1.setsName("Jyoti");
         s1.setRollNo(27);
         s1.setsAge(21);
-        s1.setLaptop(laptop);
+        s1.setLaptop(l1);
 
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Student.class);
+        configuration.addAnnotatedClass(Laptop.class);
         configuration.configure();  // this will load the XML
 
         try (SessionFactory sessionFactory = configuration.buildSessionFactory()) {
             Session session = sessionFactory.openSession();
 
             Transaction transaction = session.beginTransaction();
+            session.persist(l1);
             session.persist(s1);
             transaction.commit();
 
