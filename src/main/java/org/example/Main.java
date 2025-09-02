@@ -6,6 +6,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         Laptop l1 = new Laptop();
@@ -14,11 +16,20 @@ public class Main {
         l1.setModel("Ideapad Gaming 3");
         l1.setRam(16);
 
+        Laptop l2 = new Laptop();
+        l2.setLid(2);
+        l2.setBrand("ASUS");
+        l2.setModel("ROG");
+        l2.setRam(16);
+
         Student s1 = new Student();
         s1.setsName("Jyoti");
         s1.setRollNo(27);
         s1.setsAge(21);
-        s1.setLaptop(l1);
+        s1.setLaptops(Arrays.asList(l1, l2));
+
+        l1.setStudent(s1);
+        l2.setStudent(s1);
 
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Student.class);
@@ -30,6 +41,7 @@ public class Main {
 
             Transaction transaction = session.beginTransaction();
             session.persist(l1);
+            session.persist(l2);
             session.persist(s1);
             transaction.commit();
 

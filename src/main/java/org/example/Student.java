@@ -2,7 +2,9 @@ package org.example;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
 
 @Entity
 public class Student {
@@ -10,8 +12,8 @@ public class Student {
     private int rollNo;
     private String sName;
     private int sAge;
-    @OneToOne
-    private Laptop laptop;
+    @OneToMany(mappedBy = "student")    // we are explicitly telling the Student table to not create a third table because Laptop is keeping the track with "student" field
+    private List<Laptop> laptops;
 
     public int getRollNo() {
         return this.rollNo;
@@ -37,12 +39,12 @@ public class Student {
         this.sAge = sAge;
     }
 
-    public Laptop getLaptop() {
-        return laptop;
+    public List<Laptop> getLaptops() {
+        return laptops;
     }
 
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
+    public void setLaptops(List<Laptop> laptops) {
+        this.laptops = laptops;
     }
 
     @Override
@@ -51,7 +53,7 @@ public class Student {
                 "rollNo=" + rollNo +
                 ", sName='" + sName + '\'' +
                 ", sAge=" + sAge +
-                ", laptop=" + laptop +
+                ", laptop=" + laptops +
                 '}';
     }
 }

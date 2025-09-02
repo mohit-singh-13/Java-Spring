@@ -2,6 +2,7 @@ package org.example;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Laptop {
@@ -10,6 +11,8 @@ public class Laptop {
     private String brand;
     private String model;
     private int ram;
+    @ManyToOne
+    private Student student;
 
     public int getLid() {
         return lid;
@@ -41,6 +44,14 @@ public class Laptop {
 
     public void setRam(int ram) {
         this.ram = ram;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     @Override
