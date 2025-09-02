@@ -21,7 +21,7 @@ public class Main {
             Session session = sessionFactory.openSession();
 
             Transaction transaction = session.beginTransaction();
-            session.merge(s1);
+            session.remove(s1);
             transaction.commit();
 
             session.close();
