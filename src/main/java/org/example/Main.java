@@ -4,9 +4,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
-
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,13 +13,14 @@ public class Main {
 
         try (SessionFactory sessionFactory = configuration.buildSessionFactory()) {
             Session session = sessionFactory.openSession();
-
-            Query query = session.createQuery("FROM Laptop WHERE ram = 16");
-            List<Laptop> laptopList = query.getResultList();
-
-            System.out.println(laptopList);
-
+            Laptop l1 = session.find(Laptop.class, 1);
+            System.out.println(l1);
             session.close();
+
+            Session session1 = sessionFactory.openSession();
+            Laptop l2 = session1.find(Laptop.class, 1);
+            System.out.println(l2);
+            session1.close();
         } catch (HibernateException err) {
             System.out.println("Error while creating hibernate session : " + err.getMessage());
         }
