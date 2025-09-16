@@ -2,7 +2,7 @@ package org.example;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class Student {
     private int rollNo;
     private String sName;
     private int sAge;
-    @ManyToMany
+    @OneToMany
     private List<Laptop> laptops;
 
     public int getRollNo() {
